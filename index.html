@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Alura-Challenge-G4</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <div class="panel">
+            <textarea id="input" placeholder="Ingrese el texto aqui"></textarea>
+            <img src="img/logo-alura.png" alt="alura logo">
+            <p class="alert">&#9888 Solo letras minúsculas y sin acentos</p>
+            <button id="button1">Encriptar!</button>
+            <button id="button2">Desencriptar!</button>
+
+            <section class="section">
+
+                <textarea id="result"></textarea>
+                <img src="img/inspector.png" alt="inspector">
+                <h2>Ningun mensaje fue encontrado</h2>
+                <p>Ingresa el texto que desees encriptar o descencriptar.</p>
+                <button id="button3">Copiar</button>
+
+
+            </section>
+
+        </div>
+
+
+    </main>
+
+    <script>
+
+        function encriptar() {
+
+            var message = ''
+            var text = input.value.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()
+
+            for (count = 0; count < text.length; count++) {
+                if (text[count] == 'a') {
+                    message = message + 'ai'
+                }
+                else {
+                    if (text[count] == 'e') {
+                        message = message + 'enter'
+                    } else {
+                        if (text[count] == 'i') {
+                            message = message + 'imes'
+                        } else {
+                            if (text[count] == 'o') {
+                                message = message + 'ober'
+                            } else {
+                                if (text[count] == 'u') {
+                                    message = message + 'ufat'
+                                } else {
+                                    message = message + text[count]
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            textarea_result.innerHTML = message
+            textarea_result.style.display = 'block'
+            img_result.style.display = 'none'
+            title_result.style.display = 'none'
+            text_result.style.display = 'none'
+            button3.style.display = 'block'
+            input.value = ''
+            return message
+
+        }
+
+        function desencriptar() {
+
+            var message = ''
+            var text = input.value.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()
+            var count = 0
+
+            while (count < text.length) {
+
+                if (text[count] == 'a') {
+                    message = message + 'a'
+                    count += 2
+                }
+                else {
+                    if (text[count] == 'e') {
+                        message = message + 'e'
+                        count += 5
+                    } else {
+                        if (text[count] == 'i') {
+                            message = message + 'i'
+                            count += 4
+                        } else {
+                            if (text[count] == 'o') {
+                                message = message + 'o'
+                                count += 4
+                            } else {
+                                if (text[count] == 'u') {
+                                    message = message + 'u'
+                                    count += 4
+                                } else {
+                                    message = message + text[count]
+                                    count += 1
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+
+
+            textarea_result.innerHTML = message
+            textarea_result.style.display = 'block'
+            img_result.style.display = 'none'
+            title_result.style.display = 'none'
+            text_result.style.display = 'none'
+            button3.style.display = 'block'
+            input.value = ''
+            return message
+
+
+        }
+
+
+        function copiar() {
+            input.value = textarea_result.innerHTML
+        }
+
+        var input = document.querySelector('#input')
+        var button1 = document.querySelector('#button1')
+        var button2 = document.querySelector('#button2')
+        var button3 = document.querySelector('#button3')
+        var textarea_result = document.querySelector("#result")
+        var img_result = document.querySelector('.section img')
+        var title_result = document.querySelector('.section h2')
+        var text_result = document.querySelector('.section p')
+
+
+
+
+        button1.onclick = encriptar
+        button2.onclick = desencriptar
+        button3.onclick = copiar
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
